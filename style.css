@@ -47,6 +47,10 @@ a:link, a:visited, a:hover, a:active {
     text-align: center; /* Center the heading */
 }
 
+iframe {
+    border-radius: 20px;
+}
+
 @media (max-width: 600px) {
     .middle, .shared_projects {
         width: 90%;
