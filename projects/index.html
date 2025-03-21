@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+    <div class="middle">
+        <div class="about">
+            <h1>Projects</h1>
+            <form action="../index.html"><button type="submit">Back</button></form>
+        </div>
+    </div>
+
+    <div class="middle">
+        <div class="about">
+            <h3>Here are some Minecraft mods i have made</h3>
+            <p><a href="https://modrinth.com/user/lukasabbe">Modrinth</a> - all my mods are otherwise on my profile</p>
+        </div>
+    </div>
+
+    <div class="middle">
+        <div class = "project">
+            <img src="https://cdn.modrinth.com/data/rOrXjyPb/7f920a6acea4b0cbf065184f652ef1afc3a03824_96.webp" alt="" width="100" height="100">
+            <h3>Bookshelf Inspector - Minecraft mod</h3>
+            <p>Inspect any book in a chiseled bookshelf.</p>
+            <p id="rOrXjyPb">Download: <a href="https://modrinth.com/mod/bookshelf-inspector" target="_blank">Modrinth</a> - <a href="https://github.com/lukasabbe/bookshelf-inspector">Github</a> - Total downlaods: </p>
+        </div>
+        <div class = "project">
+            <img src="https://cdn.modrinth.com/data/NJiz0kE3/819b091b678ab8e0ffd5afbed08d53b4ce502c65_96.webp" alt="" width="100" height="100">
+            <h3>Copper Grates Bubble - Minecraft mod</h3>
+            <p>This mod allows soul sand and magma blocks effects to go thru copper grates</p>
+            <p id="NJiz0kE3">Download: <a href="https://modrinth.com/mod/copper-grates-bubble" target="_blank">Modrinth</a> - <a href="https://github.com/lukasabbe/Copper-Grates-Bubble">Github</a> - Total downlaods: </p>
+        </div>
+        <div class = "project">
+            <img src="https://cdn.modrinth.com/data/7OQY3NQS/bcd5c05ebdc864beec8c20bf3f75f2e388f21240.png" alt="" width="100" height="100">
+            <h3>Simple Elytra Hud - Minecraft mod</h3>
+            <p>An elytra HUD mod</p>
+            <p id="7OQY3NQS">Download: <a href="https://modrinth.com/mod/simpleelytrahud" target="_blank">Modrinth</a> - <a href="https://github.com/lukasabbe/simple-elytra-hud">Github</a> - Total downlaods: </p>
+        </div>
+    </div>
+    <div class="middle">
+        <div class = "project">
+            <img src="https://cdn.modrinth.com/data/zitKUUW9/74fb5ad9d24fa890675af861ec25b04b77a536ac.png" alt="" width="100" height="100">
+            <h3>Not Enough Pages - Minecraft mod</h3>
+            <p>Paste text across pages in books!</p>
+            <p id="zitKUUW9">Download: <a href="https://modrinth.com/mod/not-enough-pages" target="_blank">Modrinth</a> - <a href="https://github.com/lukasabbe/Paste-book-text">Github</a> - Total downlaods: </p>
+        </div>
+        <div class = "project">
+            <img src="https://cdn.modrinth.com/data/WmAmslke/31786753bb7e5d779e51717c3e684afae8098b77_96.webp" alt="" width="100" height="100">
+            <h3>Transparent Nametags - Minecraft mod</h3>
+            <p>This mod changes all nametags to white text and removes black background</p>
+            <p id="WmAmslke">Download: <a href="https://modrinth.com/mod/transparent-nametags" target="_blank">Modrinth</a> - <a href="https://github.com/lukasabbe/white-nametags">Github</a> - Total downlaods: </p>
+        </div>
+        <div class = "project">
+            <img src="https://cdn.modrinth.com/data/lTOqziWV/f1de4eb70dfe8fb6de4f7263fc1d057cd21365e0.png" alt="" width="100" height="100">
+            <h3>Format 2.0 - Minecraft mod</h3>
+            <p>A tool for generating NBT areas or JSON advancement areas.</p>
+            <p id="lTOqziWV">Download: <a href="hhttps://modrinth.com/mod/format2.0" target="_blank">Modrinth</a> - <a href="https://github.com/lukasabbe/Format2.0">Github</a> - Total downlaods: </p>
+        </div>
+    </div>
+    <div class="middle">
+        <div class="about">
+            <h3>Here is the discord bot:s i have worked on</h3>
+            <p>All bots is under the <a href="https://github.com/onlinesgc">SGC organisation</a></p>
+        </div>
+    </div>
+    <div class="middle">
+        <div class = "project">
+            <h3>GamerBot4.0</h3>
+            <p>A discord bot for the SGC discord server</p>
+            <p>Link <a href="https://github.com/onlinesgc/GamerBot4.0">GamerBot4.0</a></p>
+        </div>
+        <div class = "project">
+            <h3>Gamerbot-REST-API</h3>
+            <p>Rest API for Gamerbot and other services that uses SGC database</p>
+            <p>Link <a href="https://github.com/onlinesgc/Gamerbot-REST-API">Gamerbot-REST-API</a></p>
+        </div>
+        <div class = "project">
+            <h3>GamerBot Module</h3>
+            <p>A NPM module to make it more easy to work with the API</p>
+            <p>Link <a href="https://github.com/onlinesgc/Gamerbot-module">GamerBot Module</a></p>
+        </div>
+    </div>
+
+    <script>
+        (async() => {
+            const projects = await fetch("https://api.modrinth.com/v2/user/QCe37V9V/projects");
+            const projects_json = await projects.json();
+            
+            //bookshelf inspector
+            const p_bookshelf_inspector = document.getElementById("rOrXjyPb");
+            p_bookshelf_inspector.innerHTML += projects_json.find(project => project.id === "rOrXjyPb").downloads;
+
+            //copper grates bubble
+            const p_copper_grates_bubble = document.getElementById("NJiz0kE3");
+            p_copper_grates_bubble.innerHTML += projects_json.find(project => project.id === "NJiz0kE3").downloads;
+
+            //simple elytra hud
+            const p_simple_elytra_hud = document.getElementById("7OQY3NQS");
+            p_simple_elytra_hud.innerHTML += projects_json.find(project => project.id === "7OQY3NQS").downloads;
+
+            //not enough pages
+            const p_not_enough_pages = document.getElementById("zitKUUW9");
+            p_not_enough_pages.innerHTML += projects_json.find(project => project.id === "zitKUUW9").downloads;
+
+            //transparent nametags
+            const p_transparent_nametags = document.getElementById("WmAmslke");
+            p_transparent_nametags.innerHTML += projects_json.find(project => project.id === "WmAmslke").downloads;
+
+            //format 2.0
+            const p_format_2_0 = document.getElementById("lTOqziWV");
+            p_format_2_0.innerHTML += projects_json.find(project => project.id === "lTOqziWV").downloads;
+        })()
+    </script>
+</body>
+</html>

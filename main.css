@@ -1,0 +1,118 @@
+.pt-sans-regular {
+    font-family: "PT Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    background-color: #56494E;
+    color: #423a3f;
+    font-family: 'PT Sans', sans-serif;
+}
+
+
+a:link, a:visited {
+    color: #161114;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #DADFF7;
+    text-decoration: none;
+}
+
+.middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about {
+    margin: 20px;
+    text-align: center;
+    background-color: #A29C9B;
+    width: 50%;
+    border-radius: 20px;
+    border: 2px solid #DADFF7;
+    font-size: 19px;
+}
+.about button {
+    margin: 10px;
+    margin-top: -5px;
+    background-color: #423a3f;
+    color: #DADFF7;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+.links {
+    text-align: center;
+    background-color: #A29C9B;
+    width: 30%;
+    border-radius: 20px;
+    border: 2px solid #DADFF7;
+    font-size: 19px;
+    margin: 20px;
+}
+
+.project {
+    text-align: center;
+    background-color: #A29C9B;
+    width: 40%;
+    border-radius: 20px;
+    border: 2px solid #DADFF7;
+    font-size: 19px;
+    margin: 20px;
+}
+
+.project img {
+    margin-top: 20px;
+    border-radius: 50%;
+}
+
+
+@media (max-width: 600px) {
+    .about {
+        width: 80%;
+    }
+    .links {
+        width: 80%;
+    }
+    .project {
+        width: 80%;
+    }
+}
+
+.about p {
+    margin: 20px;
+    font-size: 16px;
+}
+
+
+.head img {
+    border-radius: 50%;
+    border: 2px solid #DADFF7;
+}
+
+.small_box {
+    margin: 10px;
+    background-color: #A29C9B;
+    width: 20%;
+    border-radius: 20px;
+    border: 2px solid #DADFF7;
+    text-align: center;
+}
+
+.small_box button {
+    margin: 10px;
+    margin-top: -5px;
+    background-color: #423a3f;
+    color: #DADFF7;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
