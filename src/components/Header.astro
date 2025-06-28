@@ -1,0 +1,242 @@
+---
+export interface Props {
+	activePage?: string;
+}
+
+const { activePage } = Astro.props;
+---
+
+<header class="header">
+	<nav class="nav">
+		<a href="/" class="logo-link">
+			<img src="/src/assets/icon.png" alt="Logo" class="logo" loading="eager" decoding="sync" />
+		</a>
+		<div class="nav-links">
+			<a href="/blog" class={`nav-button ${activePage === 'blog' ? 'active' : ''}`}>Blog</a>
+			<a href="/projects" class={`nav-button ${activePage === 'projects' ? 'active' : ''}`}>Projects</a>
+		</div>
+		<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+			<svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+				<path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>
+			</svg>
+			<svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"/>
+			</svg>
+		</button>
+	</nav>
+</header>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const themeToggle = document.getElementById('theme-toggle');
+		const body = document.body;
+		
+		// Check for saved theme preference or default to light theme
+		const savedTheme = localStorage.getItem('theme') || 'light';
+		body.classList.toggle('dark-theme', savedTheme === 'dark');
+		
+		themeToggle?.addEventListener('click', function() {
+			body.classList.toggle('dark-theme');
+			const isDark = body.classList.contains('dark-theme');
+			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+		});
+	});
+</script>
+
+<style>
+	.header {
+		background: linear-gradient(135deg, #3F72AF 0%, #577597 100%);
+		padding: 2rem 0;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        width: 80%;
+        margin: 0 auto 15px auto;
+	}
+
+	.nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.logo-link {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+	}
+
+	.logo {
+		width: 90px;
+		height: 90px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+		transition: all 0.3s ease;
+		backdrop-filter: blur(10px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		background-color: rgba(255, 255, 255, 0.1);
+		display: block;
+	}
+
+	.logo:hover {
+		transform: scale(1.1);
+		border-color: rgba(255, 255, 255, 0.5);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.nav-button {
+		display: inline-block;
+		padding: 12px 24px;
+		background: rgba(255, 255, 255, 0.1);
+		color: white;
+		text-decoration: none;
+		border-radius: 8px;
+		font-weight: 600;
+		font-size: 1.1rem;
+		backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		transition: all 0.3s ease;
+		text-transform: capitalize;
+	}
+
+	.nav-button:hover {
+		background: rgba(255, 255, 255, 0.2);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+	}
+
+	.nav-button.active {
+		background: rgba(255, 255, 255, 0.3);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	}
+
+	.nav-button:active {
+		transform: translateY(0);
+	}
+
+	.theme-toggle {
+		background: rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 12px;
+		color: white;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		backdrop-filter: blur(10px);
+		position: relative;
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.theme-toggle:hover {
+		background: rgba(255, 255, 255, 0.2);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+	}
+
+	.theme-toggle:active {
+		transform: translateY(0);
+	}
+
+	.sun-icon, .moon-icon {
+		position: absolute;
+		transition: all 0.3s ease;
+	}
+
+	.moon-icon {
+		opacity: 0;
+		transform: rotate(180deg);
+	}
+
+	:global(.dark-theme) .sun-icon {
+		opacity: 0;
+		transform: rotate(180deg);
+	}
+
+	:global(.dark-theme) .moon-icon {
+		opacity: 1;
+		transform: rotate(0deg);
+	}
+
+	/* Dark theme header styles */
+	:global(.dark-theme) .header {
+		background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+	}
+
+	@media (max-width: 768px) {
+		.header {
+			width: 95%;
+			margin: 0 auto 10px auto;
+			padding: 1.5rem 0;
+		}
+		
+		.nav {
+			flex-direction: column;
+			gap: 1.5rem;
+			padding: 0 1rem;
+		}
+		
+		.logo-link {
+			order: -1;
+		}
+		
+		.logo {
+			width: 60px;
+			height: 60px;
+		}
+		
+		.nav-links {
+			flex-direction: column;
+			gap: 1rem;
+			width: 100%;
+		}
+		
+		.nav-button {
+			text-align: center;
+			padding: 14px 20px;
+			font-size: 1rem;
+			width: 100%;
+			max-width: 200px;
+			margin: 0 auto;
+		}
+
+		.theme-toggle {
+			align-self: center;
+			width: 44px;
+			height: 44px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.header {
+			width: 98%;
+			padding: 1rem 0;
+		}
+		
+		.nav {
+			padding: 0 0.5rem;
+		}
+		
+		.logo {
+			width: 50px;
+			height: 50px;
+		}
+		
+		.nav-button {
+			padding: 12px 16px;
+			font-size: 0.9rem;
+		}
+	}
+</style>

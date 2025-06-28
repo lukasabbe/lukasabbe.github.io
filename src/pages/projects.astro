@@ -1,0 +1,415 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout>
+	<Header activePage="projects" />
+	
+	<main class="main">
+		<h1>Projects</h1>
+		<div class="content">
+			<div class="projects-grid">
+				{sortedProjects.map((project: any) => (
+					<article class="project-card">
+						{project.data.heroImage ? (
+							<img src={project.data.heroImage} alt={project.data.title} class="project-image" />
+						) : (
+							<div class="project-image-placeholder">
+								<div class="placeholder-content">
+									<h4>{project.data.title}</h4>
+								</div>
+							</div>
+						)}
+						<div class="project-content">
+							<h3><a href={`/projects/${project.slug}`}>{project.data.title}</a></h3>
+							<p class="project-description">{project.data.description}</p>
+							<div class="project-meta">
+								<time datetime={project.data.pubDate.toISOString()}>
+									{project.data.pubDate.toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric'
+									})}
+								</time>
+								{project.data.tags && (
+									<div class="project-tags">
+										{project.data.tags.map((tag: any) => (
+											<span class="tag">{tag}</span>
+										))}
+									</div>
+								)}
+							</div>
+							{(project.data.projectUrl || project.data.githubUrl) && (
+								<div class="project-links">
+									{project.data.projectUrl && (
+										<a href={project.data.projectUrl} target="_blank" rel="noopener noreferrer" class="project-link">
+											View Project
+										</a>
+									)}
+									{project.data.githubUrl && (
+										<a href={project.data.githubUrl} target="_blank" rel="noopener noreferrer" class="project-link github-link">
+											GitHub
+										</a>
+									)}
+								</div>
+							)}
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.main {
+		padding: 4rem 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.main h1 {
+		font-size: 3rem;
+		margin-bottom: 2rem;
+		text-align: center;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.content {
+		font-size: 1.1rem;
+		line-height: 1.8;
+		color: #555;
+	}
+
+	.content > p {
+		margin-bottom: 3rem;
+		text-align: center;
+	}
+
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	.project-card {
+		background: #f8f9fa;
+		border-radius: 12px;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		border-top: 4px solid #667eea;
+		overflow: hidden;
+	}
+
+	.project-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+	}
+
+	.project-card h3 {
+		color: #333;
+		margin: 0;
+		font-size: 1.4rem;
+	}
+
+	.project-card p {
+		color: #666;
+		margin: 0;
+		line-height: 1.6;
+	}
+
+	.project-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tag {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		padding: 0.25rem 0.75rem;
+		border-radius: 20px;
+		font-size: 0.85rem;
+		font-weight: 500;
+	}
+
+	@media (max-width: 768px) {
+		.main {
+			padding: 2rem 1rem;
+		}
+		
+		.main h1 {
+			font-size: 2rem;
+			margin-bottom: 1.5rem;
+		}
+		
+		.content {
+			font-size: 1rem;
+		}
+		
+		.content > p {
+			margin-bottom: 2rem;
+		}
+		
+		.projects-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+		
+		.project-content {
+			padding: 1.5rem;
+		}
+		
+		.project-card h3 {
+			font-size: 1.2rem;
+		}
+
+		.project-image {
+			height: 150px;
+		}
+
+		.project-image-placeholder {
+			height: 150px;
+		}
+
+		.placeholder-content h4 {
+			font-size: 1.1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.main {
+			padding: 1.5rem 0.75rem;
+		}
+		
+		.main h1 {
+			font-size: 1.75rem;
+		}
+		
+		.content {
+			font-size: 0.95rem;
+		}
+		
+		.projects-grid {
+			gap: 1rem;
+		}
+		
+		.project-content {
+			padding: 1rem;
+		}
+		
+		.project-card h3 {
+			font-size: 1.1rem;
+		}
+		
+		.project-card p {
+			font-size: 0.9rem;
+		}
+
+		.project-image {
+			height: 120px;
+		}
+
+		.project-image-placeholder {
+			height: 120px;
+		}
+
+		.placeholder-content h4 {
+			font-size: 1rem;
+		}
+		
+		.tag {
+			font-size: 0.75rem;
+			padding: 0.2rem 0.6rem;
+		}
+
+		.project-links {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
+
+	/* Additional styles for new elements */
+	.project-image {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		display: block;
+	}
+
+	.project-image-placeholder {
+		width: 100%;
+		height: 200px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.project-image-placeholder::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(10px);
+	}
+
+	.placeholder-content {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		color: white;
+		padding: 1rem;
+	}
+
+	.placeholder-content h4 {
+		font-size: 1.2rem;
+		font-weight: 600;
+		margin: 0;
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+		line-height: 1.3;
+	}
+
+	.project-content {
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.project-card h3 a {
+		color: inherit;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.project-card h3 a:hover {
+		color: #667eea;
+	}
+
+	.project-description {
+		color: #666;
+		margin: 0;
+		line-height: 1.6;
+		flex-grow: 1;
+	}
+
+	.project-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		font-size: 0.9rem;
+		color: #888;
+	}
+
+	.project-meta time {
+		font-weight: 500;
+		color: #555;
+	}
+
+	.project-links {
+		display: flex;
+		gap: 1rem;
+		margin-top: 0.5rem;
+	}
+
+	.project-link {
+		background: #667eea;
+		color: white;
+		padding: 0.5rem 1rem;
+		border-radius: 6px;
+		text-decoration: none;
+		font-size: 0.9rem;
+		font-weight: 500;
+		transition: background 0.3s ease;
+		text-align: center;
+		flex: 1;
+	}
+
+	.project-link:hover {
+		background: #5a67d8;
+	}
+
+	.github-link {
+		background: #333;
+	}
+
+	.github-link:hover {
+		background: #2d3748;
+	}
+
+	/* Dark theme styles */
+	:global(.dark-theme) .content {
+		color: #ccc;
+	}
+
+	:global(.dark-theme) .content > p {
+		color: #ccc;
+	}
+
+	:global(.dark-theme) .project-card {
+		background: rgba(255, 255, 255, 0.05);
+		border-top-color: #9f7aea;
+	}
+
+	:global(.dark-theme) .project-card h3 {
+		color: #f0f0f0;
+	}
+
+	:global(.dark-theme) .project-card h3 a:hover {
+		color: #9f7aea;
+	}
+
+	:global(.dark-theme) .project-description {
+		color: #bbb;
+	}
+
+	:global(.dark-theme) .project-meta {
+		color: #999;
+	}
+
+	:global(.dark-theme) .project-meta time {
+		color: #bbb;
+	}
+
+	:global(.dark-theme) .tag {
+		background: linear-gradient(135deg, #9f7aea 0%, #667eea 100%);
+	}
+
+	:global(.dark-theme) .project-link {
+		background: #9f7aea;
+	}
+
+	:global(.dark-theme) .project-link:hover {
+		background: #8b5cf6;
+	}
+
+	:global(.dark-theme) .github-link {
+		background: #4a5568;
+	}
+
+	:global(.dark-theme) .github-link:hover {
+		background: #2d3748;
+	}
+
+	:global(.dark-theme) .project-image-placeholder {
+		background: linear-gradient(135deg, #9f7aea 0%, #667eea 100%);
+	}
+
+	:global(.dark-theme) .project-image-placeholder::before {
+		background: rgba(0, 0, 0, 0.2);
+	}
+</style>

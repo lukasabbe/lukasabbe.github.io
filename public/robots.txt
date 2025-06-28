@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://lukasabbe.com/sitemap-index.xml
+Sitemap: https://lukasabbe.com/sitemap-0.xml
+
+# Crawl-delay (optional - helps prevent server overload)
+Crawl-delay: 1
+
+# Disallow admin or private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /draft/
+
+# Allow specific important paths
+Allow: /blog/
+Allow: /projects/
+Allow: /blog/*
+Allow: /projects/*
