@@ -4,7 +4,7 @@ description: "Retrieve results for LiU exams and other assignments."
 pubDate: 2025-08-27
 tags: ["API"]
 githubUrl: "https://github.com/lukasabbe/LIU-Tentor-API"
-projectUrl: "liutentor.lukasabbe.com"
+projectUrl: "https://liu.lukasabbe.com/"
 ---
 
 
