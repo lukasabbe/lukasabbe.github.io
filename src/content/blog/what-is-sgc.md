@@ -1,6 +1,6 @@
 ---
 title: "What is SGC?"
-description: "This is where I share my thoughts and possibly tutorials in the future."
+description: "Click here to read more about SGC!"
 pubDate: 2025-08-27
 tags: ["SGC"]
 ---
